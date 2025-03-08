@@ -1,0 +1,126 @@
+---
+title: "Nature Inspired Programing: Assignment"
+author: "Lakeesha Ramanayaka"
+date: "08 March 2024"
+format: html
+jupyter: python3
+---
+
+# Gray Wolf Optimization (GWO)
+
+## Required Packages
+```{python}
+import math
+import numpy as np
+import pandas as pd
+from pandas import DataFrame
+```
+
+## Initial Population
+
+```{python}
+population = {
+    "x1" :[5.34, 2.45, 4.45, 1.45],
+    "x2": [ 7.68, -4.54,  3.25,  3.5 ]
+}
+population_df = pd.DataFrame(population)
+population_df.head()
+```
+
+
+## Supportive Functions
+
+```{python}
+def get_fitness(x1, x2):
+    return math.pow((x1 + 2*x2 -7),2) + math.pow((2*x1 + x2 -5), 2)
+
+def find_best_wolves(dataframe: DataFrame, fitness_key="fitness"):
+    minimums = dataframe.nsmallest(3,fitness_key)
+    return minimums.iloc[0].copy(), minimums.iloc[1].copy(), minimums.iloc[2].copy()
+
+def view_best_wolves(x_alpha, x_beta, x_delta):
+    print()
+    print("x_alpha")
+    print(x_alpha)
+    print()
+
+    print("x_beta")
+    print(x_beta)
+    print()
+
+    print("x_delta")
+    print(x_delta)
+    print()
+
+def gwo(max_iterations: int, dataframe: DataFrame, x_alpha:pd.Series, x_beta:pd.Series, x_delta:pd.Series):
+    # assignment specific parameters are hardcoded
+    r1 = 0.4
+    r2 = 0.2
+    a = 1
+
+    A = round(2 * a * r1 - a,2)
+    C = 2 * r2
+
+    for iteration in range(max_iterations):
+        for index, row in dataframe.iterrows():
+            X_t = np.array([row["x1"], row["x2"]])
+            X_alpha = np.array([x_alpha["x1"], x_alpha["x2"]])
+            X_beta = np.array([x_beta["x1"], x_beta["x2"]])
+            X_delta = np.array([x_delta["x1"], x_delta["x2"]])
+
+            D_alpha = abs(C * X_alpha - X_t)
+            D_beta = abs(C * X_beta - X_t)
+            D_delta = abs(C * X_delta - X_t)
+
+            X1 = X_alpha - A * D_alpha
+            X2 = X_beta - A * D_beta
+            X3 = X_delta - A * D_delta
+
+            x_new = (X1 + X2 + X3) / 3
+            new_fitness = get_fitness(x_new[0], x_new[1])
+
+            if new_fitness < row["fitness"]:
+                # update dataframe
+                dataframe.at[index, "x1"] = x_new[0]
+                dataframe.at[index, "x2"] = x_new[1]
+                dataframe.at[index, "fitness"] = new_fitness
+    return dataframe
+```
+
+## A. Fitness of the Initial Population
+
+```{python}
+for index, row in population_df.iterrows():
+    population_df.at[index, 'fitness'] = get_fitness(row["x1"], row["x2"])
+population_df.head()
+```
+
+## B. Alpha, Beta, Delta, and Omega Wolves
+```{python}
+x_alpha, x_beta, x_delta = find_best_wolves(population_df)
+view_best_wolves(x_alpha, x_beta, x_delta)
+```
+Other wolves in the population are the **omega** wolves
+
+## C, D. Finding the Next Population with the New Fitness
+Optimizing the population towards the minimum using the following parameter values<br>
+**max_iterations = 1 **# maximum number of iterations<br>
+**r1 = 0.4** <br>
+**r2 = 0.2** <br>
+**a = 1** <br>
+
+```{python}
+# optimize
+optimized_population_df = gwo(1, population_df, x_alpha, x_beta, x_delta)
+optimized_population_df.head()
+```
+
+## E. New Alpha, Beta, Delta, and Omega Wolves
+
+```{python}
+x_alpha, x_beta, x_delta = find_best_wolves(population_df)
+view_best_wolves(x_alpha, x_beta, x_delta)
+```
+After the optimization of one iteration, **delta wolf is unchanged**. However, the **beta wolf became the delta wolf** and the **delt wolf became the new beta wolf**.
+The **gamma wolf is unchanged**.
+Except for the **alpha wolf, all other wolves' positions (x1 and x2) had been updated** during the optimization.
