@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Gray Wolf Optimization (GWO)</h1>
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages">Required Packages</h2>
-<div id="b6075d0b" class="cell" data-execution_count="1">
+<div id="6622e932" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -129,14 +129,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="initial-population" class="level2">
 <h2 class="anchored" data-anchor-id="initial-population">Initial Population</h2>
-<div id="a1f86411" class="cell" data-execution_count="2">
+<div id="88f4dffa" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x1"</span> :[<span class="fl">5.34</span>, <span class="fl">2.45</span>, <span class="fl">4.45</span>, <span class="fl">1.45</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x2"</span>: [ <span class="fl">7.68</span>, <span class="op">-</span><span class="fl">4.54</span>,  <span class="fl">3.25</span>,  <span class="fl">3.5</span> ]</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>population_df <span class="op">=</span> pd.DataFrame(population)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>population_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 
 
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="supportive-functions" class="level2">
 <h2 class="anchored" data-anchor-id="supportive-functions">Supportive Functions</h2>
-<div id="2e3e61f5" class="cell" data-execution_count="3">
+<div id="ef7b011c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_fitness(x1, x2):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.<span class="bu">pow</span>((x1 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x2 <span class="op">-</span><span class="dv">7</span>),<span class="dv">2</span>) <span class="op">+</span> math.<span class="bu">pow</span>((<span class="dv">2</span><span class="op">*</span>x1 <span class="op">+</span> x2 <span class="op">-</span><span class="dv">5</span>), <span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -237,11 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="a.-fitness-of-the-initial-population" class="level2">
 <h2 class="anchored" data-anchor-id="a.-fitness-of-the-initial-population">A. Fitness of the Initial Population</h2>
-<div id="2940ef18" class="cell" data-execution_count="4">
+<div id="88ec0324" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> population_df.iterrows():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    population_df.at[index, <span class="st">'fitness'</span>] <span class="op">=</span> get_fitness(row[<span class="st">"x1"</span>], row[<span class="st">"x2"</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>population_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 
 
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="b.-alpha-beta-delta-and-omega-wolves" class="level2">
 <h2 class="anchored" data-anchor-id="b.-alpha-beta-delta-and-omega-wolves">B. Alpha, Beta, Delta, and Omega Wolves</h2>
-<div id="1ce903b1" class="cell" data-execution_count="5">
+<div id="691d1a36" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x_alpha, x_beta, x_delta <span class="op">=</span> find_best_wolves(population_df)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>view_best_wolves(x_alpha, x_beta, x_delta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -313,16 +313,16 @@ Name: 1, dtype: float64
 </code></pre>
 </div>
 </div>
-<p>Other remaining wolf is in the population are the <strong>omega</strong> wolf. <br> Omega wolf: [5.54, 7.68]</p>
+<p>Other remaining wolf is in the population is the <strong>omega</strong> wolf. <br> Omega wolf: [5.54, 7.68]</p>
 </section>
 <section id="c-d.-finding-the-next-population-with-the-new-fitness" class="level2">
 <h2 class="anchored" data-anchor-id="c-d.-finding-the-next-population-with-the-new-fitness">C, D. Finding the Next Population with the New Fitness</h2>
 <p>Optimizing the population towards the minimum using the following parameter values<br> <strong>max_iterations = 1 </strong># maximum number of iterations<br> <strong>r1 = 0.4</strong> <br> <strong>r2 = 0.2</strong> <br> <strong>a = 1</strong> <br></p>
-<div id="3c176194" class="cell" data-execution_count="6">
+<div id="e1d903ac" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># optimize</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>optimized_population_df <span class="op">=</span> gwo(<span class="dv">1</span>, population_df, x_alpha, x_beta, x_delta)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>optimized_population_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="69">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 
 
@@ -369,7 +369,7 @@ Name: 1, dtype: float64
 </section>
 <section id="e.-new-alpha-beta-delta-and-omega-wolves" class="level2">
 <h2 class="anchored" data-anchor-id="e.-new-alpha-beta-delta-and-omega-wolves">E. New Alpha, Beta, Delta, and Omega Wolves</h2>
-<div id="2db7358e" class="cell" data-execution_count="7">
+<div id="f8d71f52" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x_alpha, x_beta, x_delta <span class="op">=</span> find_best_wolves(population_df)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>view_best_wolves(x_alpha, x_beta, x_delta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

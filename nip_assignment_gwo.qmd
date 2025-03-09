@@ -100,7 +100,7 @@ population_df.head()
 x_alpha, x_beta, x_delta = find_best_wolves(population_df)
 view_best_wolves(x_alpha, x_beta, x_delta)
 ```
-Other remaining wolf is in the population are the **omega** wolf. <br>
+Other remaining wolf is in the population is the **omega** wolf. <br>
 Omega wolf: [5.54, 7.68]
 
 ## C, D. Finding the Next Population with the New Fitness
