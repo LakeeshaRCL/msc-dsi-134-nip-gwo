@@ -5,7 +5,7 @@ date: "08 March 2024"
 format: html
 jupyter: python3
 ---
-
+### Examination Number: MSC/DSA/134
 # Gray Wolf Optimization (GWO)
 
 ## Required Packages
@@ -100,7 +100,8 @@ population_df.head()
 x_alpha, x_beta, x_delta = find_best_wolves(population_df)
 view_best_wolves(x_alpha, x_beta, x_delta)
 ```
-Other wolves in the population are the **omega** wolves
+Other remaining wolf is in the population are the **omega** wolf. <br>
+Omega wolf: [5.54, 7.68]
 
 ## C, D. Finding the Next Population with the New Fitness
 Optimizing the population towards the minimum using the following parameter values<br>
@@ -121,6 +122,7 @@ optimized_population_df.head()
 x_alpha, x_beta, x_delta = find_best_wolves(population_df)
 view_best_wolves(x_alpha, x_beta, x_delta)
 ```
-After the optimization of one iteration, **delta wolf is unchanged**. However, the **beta wolf became the delta wolf** and the **delt wolf became the new beta wolf**.
-The **gamma wolf is unchanged**.
+After the optimization of one iteration, **alpha wolf is unchanged**. However, the **beta wolf became the delta wolf** and the **delta wolf became the new beta wolf**.
+The **omega wolf is unchanged**.
 Except for the **alpha wolf, all other wolves' positions (x1 and x2) had been updated** during the optimization.
+
