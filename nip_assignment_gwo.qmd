@@ -100,15 +100,15 @@ population_df.head()
 x_alpha, x_beta, x_delta = find_best_wolves(population_df)
 view_best_wolves(x_alpha, x_beta, x_delta)
 ```
-Other remaining wolf is in the population is the **omega** wolf. <br>
+Other remaining wolf is in the population is the **omega** wolf. \
 Omega wolf: [5.54, 7.68]
 
 ## C, D. Finding the Next Population with the New Fitness
-Optimizing the population towards the minimum using the following parameter values<br>
-**max_iterations = 1 **# maximum number of iterations<br>
-**r1 = 0.4** <br>
-**r2 = 0.2** <br>
-**a = 1** <br>
+Optimizing the population towards the minimum using the following parameter values\
+**max_iterations = 1 **# maximum number of iterations\
+**r1 = 0.4** \
+**r2 = 0.2** \
+**a = 1** \
 
 ```{python}
 # optimize
